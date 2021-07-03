@@ -26,6 +26,7 @@ public class Instantiation implements CommandLineRunner {
     @Override
     public void run(String[] args) throws Exception {
 
+
         locationRepository.deleteAll();
         characterRepository.deleteAll();
 
@@ -40,7 +41,7 @@ public class Instantiation implements CommandLineRunner {
         characterRepository.saveAll(Arrays.asList(c1,c2,c3));
         locationRepository.saveAll(Arrays.asList(l1,l2,l3));
 
-        LocationDTO l1Dto = new LocationDTO(l1.getName(), l1.getDimension(), new CharacterDTO(c1), l1.getUrl());
+
 
     }
 }

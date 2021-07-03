@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@Document(collection = "location")
 public class Location implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -26,6 +27,8 @@ public class Location implements Serializable {
     private String id;
     private String name;
     private String dimension;
+    @DBRef
+    private CharacterDTO[] residents;
     private String url;
     private LocalDateTime created = LocalDateTime.now();
 
