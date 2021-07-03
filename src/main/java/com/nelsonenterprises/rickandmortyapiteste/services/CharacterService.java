@@ -1,12 +1,9 @@
 package com.nelsonenterprises.rickandmortyapiteste.services;
 
-import com.nelsonenterprises.rickandmortyapiteste.DTO.CharacterDTO;
 import com.nelsonenterprises.rickandmortyapiteste.domain.Character;
 import com.nelsonenterprises.rickandmortyapiteste.repositories.CharacterRepository;
-import com.nelsonenterprises.rickandmortyapiteste.repositories.LocationRepository;
 import com.nelsonenterprises.rickandmortyapiteste.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.stereotype.Service;
 
 
@@ -19,7 +16,6 @@ public class CharacterService {
     @Autowired
     private CharacterRepository repo;
 
-
     public List<Character> findAll() {
         return repo.findAll();
     }
@@ -31,7 +27,6 @@ public class CharacterService {
     public Character findById(String id) {
         Optional<Character> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
-
     }
 
     public void delete(String id) {

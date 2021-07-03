@@ -1,6 +1,5 @@
 package com.nelsonenterprises.rickandmortyapiteste.DTO;
 
-import com.nelsonenterprises.rickandmortyapiteste.domain.Character;
 import com.nelsonenterprises.rickandmortyapiteste.domain.Location;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +17,8 @@ public class CharacterDTO implements Serializable {
     private String id;
     private String url;
 
-    public CharacterDTO (Character obj) {
-        this.url = obj.getImage();
+    public CharacterDTO(Character obj) {
+        this.id = id;
+        this.url = url;
     }
 }

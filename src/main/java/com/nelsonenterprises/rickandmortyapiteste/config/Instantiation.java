@@ -1,6 +1,5 @@
 package com.nelsonenterprises.rickandmortyapiteste.config;
 
-import com.nelsonenterprises.rickandmortyapiteste.DTO.CharacterDTO;
 import com.nelsonenterprises.rickandmortyapiteste.DTO.LocationDTO;
 import com.nelsonenterprises.rickandmortyapiteste.domain.Character;
 import com.nelsonenterprises.rickandmortyapiteste.domain.Location;
@@ -26,7 +25,6 @@ public class Instantiation implements CommandLineRunner {
     @Override
     public void run(String[] args) throws Exception {
 
-
         locationRepository.deleteAll();
         characterRepository.deleteAll();
 
@@ -41,6 +39,10 @@ public class Instantiation implements CommandLineRunner {
         characterRepository.saveAll(Arrays.asList(c1,c2,c3));
         locationRepository.saveAll(Arrays.asList(l1,l2,l3));
 
+        Character character1 = new Character(c1.getName(), c1.getStatus(), c1.getSpecies(), c1.getGender(), new LocationDTO(l1), new LocationDTO(l2), c1.getImage());
+
+        locationRepository.saveAll(Arrays.asList(l1,l2));
+        characterRepository.save(character1);
 
 
     }

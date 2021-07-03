@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class LocationDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -19,9 +20,9 @@ public class LocationDTO implements Serializable {
     private String id;
     private String name;
     private String url;
-    private LocalDateTime created = LocalDateTime.now();
 
     public LocationDTO(Location obj) {
+        this.id = id;
         this.name = name;
         this.url = url;
     }
