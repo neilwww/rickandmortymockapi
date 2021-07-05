@@ -1,7 +1,5 @@
 package com.nelsonenterprises.rickandmortyapiteste.config;
 
-import com.nelsonenterprises.rickandmortyapiteste.domain.Character;
-import com.nelsonenterprises.rickandmortyapiteste.domain.Location;
 import com.nelsonenterprises.rickandmortyapiteste.repositories.CharacterRepository;
 import com.nelsonenterprises.rickandmortyapiteste.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;

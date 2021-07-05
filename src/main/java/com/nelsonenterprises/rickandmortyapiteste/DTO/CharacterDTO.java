@@ -24,5 +24,4 @@ public class CharacterDTO implements Serializable {
     private String url;
     private LocalDateTime created = LocalDateTime.now();
 
-
 }

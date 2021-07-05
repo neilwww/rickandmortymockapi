@@ -1,6 +1,5 @@
 package com.nelsonenterprises.rickandmortyapiteste.domain;
 
-import com.nelsonenterprises.rickandmortyapiteste.DTO.CharacterDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,5 +26,9 @@ public class Location implements Serializable {
     private String url;
     private LocalDateTime created = LocalDateTime.now();
 
+    public Location(String name, String url) {
+        this.name = name;
+        this.url = url;
+    }
 }
 

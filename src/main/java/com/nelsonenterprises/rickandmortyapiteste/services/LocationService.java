@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,17 +44,11 @@ public class LocationService {
         locationRepository.deleteById(id);
     }
 
+    public void update(Location location) {
+        Location newLoc = locationRepository.findById(location.getId()).orElseThrow(() -> new ObjectNotFoundException("Location not found"));
+        updateData(newLoc, location);
+        locationRepository.save(newLoc);
 
-    //Arrumar bug de ter quer passar id no JSON
-    public void update(LocationDTO location, String id) {
-        try {
-            LocationDTO currentLocationInfo = findById(location.getId());
-        } catch (ObjectNotFoundException e) {
-            throw new IllegalArgumentException("Location not Found");
-        }
-        Location entity = convertToBO(location);
-        entity.setId(location.getId());
-        locationRepository.save(entity);
     }
 
     private LocationDTO convertToDTO(Location location) {
@@ -85,5 +80,12 @@ public class LocationService {
         entity.setUrl(locationDTO.getUrl());
 
         return entity;
+    }
+    private void updateData(Location newLoc, Location location){
+        newLoc.setId(location.getId());
+        newLoc.setName(location.getName());
+        newLoc.setDimension(location.getDimension());
+        newLoc.setUrl(location.getUrl());
+        newLoc.setCreated(location.getCreated());
     }
 }

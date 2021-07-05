@@ -45,8 +45,8 @@ public class CharacterResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody CharacterDTO dto, @PathVariable String id) {
-        service.update(dto, id);
+    public ResponseEntity<Void> update(@RequestBody Character character, @PathVariable String id) {
+        service.update(character);
         return ResponseEntity.ok().build();
     }
 }

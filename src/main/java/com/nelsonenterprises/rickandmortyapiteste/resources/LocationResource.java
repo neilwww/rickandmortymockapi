@@ -44,8 +44,8 @@ public class LocationResource {
     }
 
     @PutMapping(value ="/{id}")
-    public ResponseEntity<Void> update (@RequestBody LocationDTO location, @PathVariable String id) {
-        service.update(location, id);
+    public ResponseEntity<Void> update (@RequestBody Location location, @PathVariable String id) {
+        service.update(location);
         return ResponseEntity.ok().build();
     }
 

@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,27 +34,18 @@ public class CharacterService {
         return convertToDTO(character);
     }
 
-    public Character create(Character obj) {
-        return characterRepository.insert(obj);
+    public Character create(Character character) {
+        return characterRepository.insert(character);
     }
 
     public void delete(String id) {
         characterRepository.deleteById(id);
     }
 
-    //Arrumar bug que criar objeto novo em vez de atualizar o antigo
-    public void update(CharacterDTO characterDTO, String Id) {
-        try {
-            CharacterDTO currentChar = findById(characterDTO.getId());
-        }
-        catch (ObjectNotFoundException e) {
-            throw new IllegalArgumentException("Character not Found");
-        }
-
-        Character character = convertToBO(characterDTO);
-        character.setId(characterDTO.getId());
-        characterRepository.save(character);
-
+    public void update(Character character) {
+        Character newCharacter = characterRepository.findById(character.getId()).orElseThrow(() -> new ObjectNotFoundException("Character not found"));
+        updateData(newCharacter, character);
+        characterRepository.save(newCharacter);
 
     }
 
@@ -75,13 +65,12 @@ public class CharacterService {
         entity.setSpecies(character.getSpecies());
         entity.setGender(character.getGender());
         entity.setOrigin(new LocationData(origin.getName(), defaultLocationURL + origin.getId()));
-        entity.setLocation(new LocationData(location.getName(),defaultLocationURL + location.getId()));
+        entity.setLocation(new LocationData(location.getName(), defaultLocationURL + location.getId()));
         entity.setUrl(defaultcharURL + character.getId());
         return entity;
     }
-    private Character convertToBO (CharacterDTO dto) {
-        LocationData origin = dto.getOrigin();
-        LocationData location = dto.getLocation();
+
+    private Character convertToBO(CharacterDTO dto) {
 
         Character character = new Character();
 
@@ -90,10 +79,20 @@ public class CharacterService {
         character.setStatus(dto.getStatus());
         character.setSpecies(dto.getSpecies());
         character.setGender(dto.getGender());
-        character.setOrigin(String.valueOf(new LocationData(origin.getName(), origin.getUrl())));
-        character.setLocation(String.valueOf(location));
         character.setUrl(dto.getUrl());
         return character;
+
+    }
+
+    private void updateData(Character newChar, Character character) {
+        newChar.setId(character.getId());
+        newChar.setName(character.getName());
+        newChar.setStatus(character.getStatus());
+        newChar.setSpecies(character.getSpecies());
+        newChar.setGender(character.getGender());
+        newChar.setOrigin(character.getOrigin());
+        newChar.setLocation(character.getLocation());
+        newChar.setUrl(character.getUrl());
 
     }
 
