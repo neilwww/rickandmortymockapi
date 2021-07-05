@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -24,8 +24,8 @@ public class Character implements Serializable {
     private Status status;
     private String species;
     private Gender gender;
-    private LocationDTO origin;
-    private LocationDTO location;
+    private Location origin;
+    private Location location;
     private String image;
     private LocalDateTime created = LocalDateTime.now();
 
@@ -42,21 +42,5 @@ public class Character implements Serializable {
         Genderless
     }
 
-    public Character(String name, Status status, String species, Gender gender, String image) {
-        this.name = name;
-        this.status = status;
-        this.species = species;
-        this.gender = gender;
-        this.image = image;
-    }
 
-    public Character(String name, Status status, String species, Gender gender, LocationDTO origin, LocationDTO location, String image) {
-        this.name = name;
-        this.status = status;
-        this.species = species;
-        this.gender = gender;
-        this.origin = origin;
-        this.location = location;
-        this.image = image;
-    }
 }
