@@ -1,5 +1,7 @@
 package com.nelsonenterprises.rickandmortyapiteste.config;
 
+import com.nelsonenterprises.rickandmortyapiteste.domain.Character;
+import com.nelsonenterprises.rickandmortyapiteste.domain.Location;
 import com.nelsonenterprises.rickandmortyapiteste.repositories.CharacterRepository;
 import com.nelsonenterprises.rickandmortyapiteste.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,8 @@ public class Instantiation implements CommandLineRunner {
     @Override
     public void run(String[] args) throws Exception {
 
-        characterRepository.deleteAll();
+        Character character = new Character();
+        Location location = new Location();
 
     }
 }

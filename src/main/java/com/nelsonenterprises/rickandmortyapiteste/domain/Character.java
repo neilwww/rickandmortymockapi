@@ -41,6 +41,7 @@ public class Character implements Serializable {
         MALE,
         GENDERLESS
     }
+
     @Data
     @AllArgsConstructor
     public static class LocationData  {
