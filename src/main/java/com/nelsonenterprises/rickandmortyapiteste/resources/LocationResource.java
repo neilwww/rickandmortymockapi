@@ -1,5 +1,6 @@
 package com.nelsonenterprises.rickandmortyapiteste.resources;
 
+import com.nelsonenterprises.rickandmortyapiteste.DTO.LocationDTO;
 import com.nelsonenterprises.rickandmortyapiteste.domain.Location;
 import com.nelsonenterprises.rickandmortyapiteste.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +19,20 @@ public class LocationResource {
     private LocationService service;
 
     @GetMapping
-    public ResponseEntity<List<Location>> findAll() {
-        List<Location> list = service.findAll();
+    public ResponseEntity<List<LocationDTO>> findAll() {
+        List<LocationDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Location> findById(@PathVariable String id){
-        Location location = service.findById(id);
+    public ResponseEntity<LocationDTO> findById(@PathVariable String id){
+        LocationDTO location = service.findById(id);
         return ResponseEntity.ok().body(location);
     }
 
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody Location location) {
-        location = service.insert(location);
+        service.create(location);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(location.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
@@ -39,14 +40,13 @@ public class LocationResource {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id){
         service.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping(value ="/{id}")
-    public ResponseEntity<Void> update (@RequestBody Location location, @PathVariable String id) {
-        location.setId(id);
-        location = service.update(location);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> update (@RequestBody LocationDTO location, @PathVariable String id) {
+        service.update(location, id);
+        return ResponseEntity.ok().build();
     }
 
 }

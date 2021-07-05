@@ -1,13 +1,12 @@
 package com.nelsonenterprises.rickandmortyapiteste.domain;
 
+import com.nelsonenterprises.rickandmortyapiteste.DTO.CharacterDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "location")
+
 public class Location implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -26,12 +26,6 @@ public class Location implements Serializable {
     private List<Character> residents;
     private String url;
     private LocalDateTime created = LocalDateTime.now();
-
-    public Location(String name, String dimension, String url) {
-        this.name = name;
-        this.dimension = dimension;
-        this.url = url;
-    }
 
 }
 

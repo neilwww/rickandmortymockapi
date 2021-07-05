@@ -1,6 +1,5 @@
 package com.nelsonenterprises.rickandmortyapiteste.domain;
 
-import com.nelsonenterprises.rickandmortyapiteste.DTO.LocationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,32 +14,41 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "character")
+
 public class Character implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     private String id;
     private String name;
-    private Status status;
+    private StatusEnum status;
     private String species;
-    private Gender gender;
-    private Location origin;
-    private Location location;
-    private String image;
+    private GenderEnum gender;
+    private String origin;
+    private String location;
+    private String url;
     private LocalDateTime created = LocalDateTime.now();
 
-    public enum Status {
-        Unknown,
-        Alive,
-        Dead,
+    public enum StatusEnum {
+        UNKNOWN,
+        ALIVE,
+        DEAD,
     }
 
-    public enum Gender {
+    public enum GenderEnum {
 
-        Female,
-        Male,
-        Genderless
+        FEMALE,
+        MALE,
+        GENDERLESS
     }
+    @Data
+    @AllArgsConstructor
+    public static class LocationData  {
+
+        private String name;
+        private String url;
+    }
+
 
 
 }
